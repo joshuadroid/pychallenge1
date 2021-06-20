@@ -20,30 +20,47 @@ greatest_decrease = 0
 greatest_increase_month = ""
 greatest_decrease_month = ""
 average_list = []
+value_list = []
 
 #Using a for loop to calculate everything
 for row in data:
     #calculate count and total
     count += 1
     total += int(row[1])
-
-    #if statement to see if a value is higher or lower than a previous
-    if int(row[1]) > greatest_increase:
-        greatest_increase = int(row[1])
-        greatest_increase_month = str(row[0])
-    elif int(row[1]) < greatest_decrease:
-        greatest_decrease = int(row[1])
-        greatest_decrease_month = str(row[0])
+    print(row[1])
+    # change = int(row[1]) - int(row[1]-1)
+    # print(change)
 
 
 
 
-# for i in data:
-#     month = data[i]
-#     next_month = data[i+1]
-#     change = month / next_month
-#     print(f"{month} / {next_month} will equal {change}")
-    
+
+
+
+
+## TODO Get this average change working!!
+
+## pseudo code it.
+## run a for loop to determine each change
+## capture all values in a list
+## sum the values of the list
+## divide by the length of the list
+
+# print(value_list)
+
+# def compare(list):
+#     return_list = []
+#     n = 0
+#     for x in list:
+#         if len(list) == n+1:
+#             print(return_list)
+#             break
+
+#         n += 1
+#         return_list.append(change)
+
+# compare(value_list)
+
 
 
 #print statement of everything
@@ -51,10 +68,11 @@ print(f"Financial Analysis")
 print(f"--------------------------")
 print(f"Total Months: {count}")
 print(f"Total: ${total}")
+average = 0
 print(f"Average Change: ${average}")
 print(f"Greatest Increase in Profits: {greatest_increase_month} ${greatest_increase}")
 print(f"Greatest Decrease in Profits: {greatest_decrease_month} ${greatest_decrease}")
 
 
-# TODO: get change loop working (line 41)
+# TODO: get change loop working (above)
 # TODO: export text file with results
