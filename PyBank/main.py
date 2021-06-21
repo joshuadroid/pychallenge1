@@ -1,4 +1,5 @@
 import csv
+import os
 #declare path
 PATH = "Resources/budget_data.csv"
 PROFIT_COL = 1
@@ -20,7 +21,6 @@ greatest_increase = 0
 greatest_decrease = 0
 greatest_increase_month = ""
 greatest_decrease_month = ""
-average_list = []
 profit_list = []
 return_list = []
 previous_profit = int(data[0][PROFIT_COL])
@@ -46,10 +46,8 @@ for row in data:
     profit_list.append(int(current_change))
     previous_profit = current_profit
 
-print(profit_list)
+#calculate the average change
 average = sum(profit_list) / len(profit_list)
-
-
 
 #print statement of everything
 print(f"Financial Analysis")
@@ -61,4 +59,17 @@ print(f"Greatest Increase in Profits: {greatest_increase_month} ${greatest_incre
 print(f"Greatest Decrease in Profits: {greatest_decrease_month} ${greatest_decrease}")
 
 
-# TODO: export text file with results
+# Export text file with results
+output_path = os.path.join("Analysis", "Financial_Analysis.csv")
+
+with open(output_path, 'w') as csvfile:
+    csvwriter = csv.writer(csvfile, delimiter=',')
+    
+    csvwriter.writerow(["Financial Analysis"])
+    csvwriter.writerow(["Count", count])
+    csvwriter.writerow(["Total", total])
+    csvwriter.writerow(["Average Change", average])
+    csvwriter.writerow(["Greatest Increase in Profits Month", greatest_increase_month])
+    csvwriter.writerow(["Greatest Increase in Profits", greatest_increase])
+    csvwriter.writerow(["Greatest Decrease in Profits Month", greatest_decrease_month])
+    csvwriter.writerow(["Greatest Decrease in Profits", greatest_decrease])
