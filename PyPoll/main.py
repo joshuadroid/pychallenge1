@@ -30,7 +30,7 @@ print(total_count)
 print(vote_count)
 
 
-## need to find percentages and winner
+## TODO need to find percentages and winner
 
 
 print(f"Election Results")
@@ -38,8 +38,11 @@ print(f"-----------------------")
 print(f"Total Votes: {total_count}")
 print(f"-----------------------")
 
-for x in vote_count.keys():
-    print(f"{vote_count.keys(x)} : {vote_count.keys(x) / total_count}% ({vote_count.values(x)}) ")
+# for x in vote_count.keys():
+#     list = vote_count.items()
+#     x = list[0]
+#     y = list[1]
+#     print(f"{x} : {round(y / total_count, 2)}% ({y}) ")
 
 print(f"-----------------------")
 # print(f"Winner: {winner}")

@@ -1,13 +1,14 @@
 import csv
-
 #declare path
-path = "Resources/budget_data.csv"
-data = []
+PATH = "Resources/budget_data.csv"
+PROFIT_COL = 1
+MONTH_COL = 0
 
 #open and read the csv file, commit to a list
-with open(path) as csvfile:
+with open(PATH) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
     csvheader = next(csvreader)
+    data = []
     for x in csvreader:
         data.append(x)
 
@@ -20,46 +21,33 @@ greatest_decrease = 0
 greatest_increase_month = ""
 greatest_decrease_month = ""
 average_list = []
-value_list = []
+profit_list = []
+return_list = []
+previous_profit = int(data[0][PROFIT_COL])
 
 #Using a for loop to calculate everything
 for row in data:
     #calculate count and total
     count += 1
-    total += int(row[1])
-    print(row[1])
-    # change = int(row[1]) - int(row[1]-1)
-    # print(change)
+    current_profit = int(row[PROFIT_COL])
+    total += current_profit
 
+    # calculcate the change and store in current_change
+    current_change = current_profit - previous_profit
 
+    #if statement to see if a value is higher or lower than a previous
+    if int(current_change) > greatest_increase:
+        greatest_increase = int(current_change)
+        greatest_increase_month = str(row[MONTH_COL])
+    elif int(current_change) < greatest_decrease:
+        greatest_decrease = int(current_change)
+        greatest_decrease_month = str(row[MONTH_COL])
 
+    profit_list.append(int(current_change))
+    previous_profit = current_profit
 
-
-
-
-
-## TODO Get this average change working!!
-
-## pseudo code it.
-## run a for loop to determine each change
-## capture all values in a list
-## sum the values of the list
-## divide by the length of the list
-
-# print(value_list)
-
-# def compare(list):
-#     return_list = []
-#     n = 0
-#     for x in list:
-#         if len(list) == n+1:
-#             print(return_list)
-#             break
-
-#         n += 1
-#         return_list.append(change)
-
-# compare(value_list)
+print(profit_list)
+average = sum(profit_list) / len(profit_list)
 
 
 
@@ -68,11 +56,9 @@ print(f"Financial Analysis")
 print(f"--------------------------")
 print(f"Total Months: {count}")
 print(f"Total: ${total}")
-average = 0
 print(f"Average Change: ${average}")
 print(f"Greatest Increase in Profits: {greatest_increase_month} ${greatest_increase}")
 print(f"Greatest Decrease in Profits: {greatest_decrease_month} ${greatest_decrease}")
 
 
-# TODO: get change loop working (above)
 # TODO: export text file with results
