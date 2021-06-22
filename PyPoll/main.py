@@ -1,4 +1,5 @@
 import csv
+import os
 data = []
 
 # Set Path and Open File
@@ -19,6 +20,7 @@ with open(path, 'r') as csvfile:
 total_count = 0
 vote_count = {}
 
+# For Loop to count all the votes using a dictionary
 for row in data:
     total_count += 1
     if row[2] in vote_count.keys():
@@ -26,24 +28,38 @@ for row in data:
     else:
         vote_count[row[2]] = 1
 
-print(total_count)
-print(vote_count)
-
-
-## TODO need to find percentages and winner
-
-
+# Start printing the results
 print(f"Election Results")
 print(f"-----------------------")
 print(f"Total Votes: {total_count}")
 print(f"-----------------------")
+winner = 0
+winner_name = ""
 
-# for x in vote_count.keys():
-#     list = vote_count.items()
-#     x = list[0]
-#     y = list[1]
-#     print(f"{x} : {round(y / total_count, 2)}% ({y}) ")
+
+# Export text file with results
+output_path = os.path.join("Analysis", "Financial_Analysis.csv")
+
+with open(output_path, 'w') as csvfile:
+    
+    csvfile.write(f"Election Results\n")
+    csvfile.write(f"-----------------------\n")
+    csvfile.write(f"Total Votes: {total_count}\n")
+    csvfile.write(f"-----------------------\n")
+
+    # For Loop to determine the winner and output everyone's results
+    for x in vote_count.keys():
+        percentage = (int(vote_count[str(x)]) / total_count) * 100
+        print(f"{x} {percentage:.3f}% ({vote_count[str(x)]})")
+        csvfile.write(f"{x} {percentage:.3f}% ({vote_count[str(x)]})")
+        if percentage > winner:
+            winner = percentage
+            winner_name = x
+
+    csvfile.write(f"-----------------------\n")
+    csvfile.write(f"Winner: {winner_name}\n")
+    csvfile.write(f"-----------------------")
 
 print(f"-----------------------")
-# print(f"Winner: {winner}")
+print(f"Winner: {winner_name}")
 print(f"-----------------------")
