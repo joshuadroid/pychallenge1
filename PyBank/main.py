@@ -59,7 +59,7 @@ print(f"Greatest Increase in Profits: {greatest_increase_month} ${greatest_incre
 print(f"Greatest Decrease in Profits: {greatest_decrease_month} ${greatest_decrease}")
 
 
-# Export text file with results
+# TODO: export text file with results
 output_path = os.path.join("Analysis", "Financial_Analysis.csv")
 
 with open(output_path, 'w') as csvfile:

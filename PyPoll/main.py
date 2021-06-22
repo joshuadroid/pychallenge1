@@ -51,7 +51,7 @@ with open(output_path, 'w') as csvfile:
     for x in vote_count.keys():
         percentage = (int(vote_count[str(x)]) / total_count) * 100
         print(f"{x} {percentage:.3f}% ({vote_count[str(x)]})")
-        csvfile.write(f"{x} {percentage:.3f}% ({vote_count[str(x)]})")
+        csvfile.write(f"{x} {percentage:.3f}% ({vote_count[str(x)]})\n")
         if percentage > winner:
             winner = percentage
             winner_name = x
